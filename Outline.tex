@@ -1,0 +1,110 @@
+% Created 2021-07-06 Tue 16:28
+% Intended LaTeX compiler: pdflatex
+\documentclass[journal=accacs,manuscript=article, email=true, layout=traditional]{achemso}
+  \setkeys{acs}{biblabel=brackets,super=true,articletitle=False,maxauthors=0}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{url}
+\usepackage{siunitx}
+\usepackage{mhchem}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{wasysym}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{minted}
+\usepackage[section]{placeins}
+\usepackage[linktocpage, pdfstartview=FitH, colorlinks=true, linkcolor=blue, anchorcolor=blue, citecolor=blue, filecolor=blue, menucolor=blue, urlcolor=blue]{hyperref}
+\usepackage{attachfile}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\keywords{}
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\thetable}{\arabic{table}}
+\usepackage{lmodern}
+\usepackage{cleveref}
+\author{Craig Waitt}
+\affiliation{Department of Chemistry and Biochemistry, University of Notre Dame, Notre Dame, Indiana 46556, United States}
+\author{Xuyao Gao}
+\affiliation{Department of Chemical and Biomolecular Engineering, University of Notre Dame, Notre Dame, Indiana 4656, United States}
+\author{William F. Schneider}
+\email{wschneider@nd.edu}
+\affiliation{Department of Chemical and Biomolecular Engineering, University of Notre Dame, Notre Dame, Indiana 46556, United States}
+\alsoaffiliation{Department of Chemistry and Biochemistry, University of Notre Dame, Notre Dame, Indiana 46556, United States}
+\date{}
+\title{Developing Relationships between FW/OSDA orientation and Al siting}
+\begin{document}
+
+\begin{header}
+\end{header}
+
+\newpage
+
+\section{Workflow}
+\label{sec:orga5c2193}
+
+\subsection{Objectives}
+\label{sec:orgaa3964d}
+
+\begin{enumerate}
+\item Develop models to capture/describe the orientational preference a framework (FW) has for a particular organic structure directing agent (OSDA)
+\item Identify FW/OSDA combinations that could influence Al ordering through preferential OSDA orientations.
+\item Compute and compare organic and inorganic structure directing agent interactions with frameworks to identify consequences on Si/Al ratios
+\end{enumerate}
+
+\subsection{Plan of Attack}
+\label{sec:org72b40c4}
+
+\begin{enumerate}
+\item \textbf{What is the preferential orientational of a specific OSDA/Zeolite combination}
+
+\begin{enumerate}
+\item Develop a model to capture OSDA Orientations
+\begin{itemize}
+\item Classical molecular dynamics (CMD) at very high temperatures (\(T \geq 10,000\)) to sample different possible orientation
+\end{itemize}
+
+\item Compute interaction energy (IE) of all FW and OSDA combinations (maybe free energies):
+\begin{itemize}
+\item CHA and AEI with TMADA, DMDMP (isomers), and DEDMP (isomers)
+\begin{itemize}
+\item include LTA and TMA?
+\end{itemize}
+\item Using CMD at \SI{343}{K} (rigid framework)
+\item Using density functional theory with dispersion (DFT-D3) (flexible framework)
+\begin{itemize}
+\item Rigid Framework as well?
+\end{itemize}
+\end{itemize}
+
+\item Evaluate orientation and positioning dependence of OSDA in FW
+\begin{itemize}
+\item Measure the orientation of an OSDA relative to some axis which encompases the cage the OSDA is in
+\item Measure the location of the OSDA center of mass is relative to the center of the zeolite cage
+\end{itemize}
+\end{enumerate}
+
+\item \textbf{What is the impact of Al siting with respect to OSDA orientation}
+
+\begin{enumerate}
+\item Using some preferred orientation(s)
+\begin{itemize}
+\item Using the same technique developed by Sichi, run CMD on Al substituted FW and charged OSDA as in 1(a)
+\item Refine using techniques in 1(b)
+\end{itemize}
+\item Compare relative energies (or IE?)
+\begin{itemize}
+\item Is there a difference between AEI and CHA?
+\end{itemize}
+\end{enumerate}
+
+\item \textbf{What is the impact of co-caging (Relevent?)}
+
+\begin{enumerate}
+\item Charged or chargless model
+\end{enumerate}
+\end{enumerate}
+\end{document}

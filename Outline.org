@@ -1,0 +1,91 @@
+#+begin_header
+#+TITLE: Developing Relationships between FW/OSDA orientation and Al siting 
+#+LATEX_CLASS: achemso
+#+LATEX_CLASS_OPTIONS: [journal=accacs,manuscript=article, email=true, layout=traditional]
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+OPTIONS: author:nil date:nil toc:nil ':t
+#+latex_header: \setkeys{acs}{biblabel=brackets,super=true,articletitle=False,maxauthors=0}
+#+latex_header: \usepackage[utf8]{inputenc}
+#+latex_header: \usepackage[T1]{fontenc}
+#+latex_header: \usepackage{fixltx2e}
+#+latex_header: \usepackage{url}
+#+latex_header: \usepackage{siunitx}
+#+latex_header: \usepackage{mhchem}
+#+latex_header: \usepackage{graphicx}
+#+latex_header: \usepackage{color}
+#+latex_header: \usepackage{amsmath}
+#+latex_header: \usepackage{textcomp}
+#+latex_header: \usepackage{wasysym}
+#+latex_header: \usepackage{latexsym}
+#+latex_header: \usepackage{amssymb}
+#+latex_header: \usepackage{minted}
+#+latex_header: \usepackage[section]{placeins}
+#+latex_header: \usepackage[linktocpage, pdfstartview=FitH, colorlinks=true, linkcolor=blue, anchorcolor=blue, citecolor=blue, filecolor=blue, menucolor=blue, urlcolor=blue]{hyperref}
+#+latex_header: \usepackage{attachfile}
+#+latex_header: \newcommand{\red}[1]{\textcolor{red}{#1}}
+#+latex_header: \newcommand{\blue}[1]{\textcolor{blue}{#1}}
+#+latex_header: \keywords{}
+#+latex_header:\renewcommand{\thefigure}{\arabic{figure}}
+#+latex_header:\renewcommand{\thetable}{\arabic{table}}
+#+latex_header:\usepackage{lmodern}
+#+latex_header:\usepackage{cleveref}
+
+#+latex_header: \author{Craig Waitt}
+#+latex_header: \affiliation{Department of Chemistry and Biochemistry, University of Notre Dame, Notre Dame, Indiana 46556, United States}
+
+#+latex_header: \author{Xuyao Gao}
+#+latex_header: \affiliation{Department of Chemical and Biomolecular Engineering, University of Notre Dame, Notre Dame, Indiana 4656, United States}
+
+#+latex_header: \author{William F. Schneider}
+#+latex_header: \email{wschneider@nd.edu}
+#+latex_header: \affiliation{Department of Chemical and Biomolecular Engineering, University of Notre Dame, Notre Dame, Indiana 46556, United States}
+#+latex_header: \alsoaffiliation{Department of Chemistry and Biochemistry, University of Notre Dame, Notre Dame, Indiana 46556, United States}
+
+#+end_header
+
+\newpage
+
+* Workflow
+
+** Objectives
+
+1. Develop models to capture/describe the orientational preference a framework (FW) has for a particular organic structure directing agent (OSDA)
+2. Identify FW/OSDA combinations that could influence Al ordering through preferential OSDA orientations.
+3. Compute and compare organic and inorganic structure directing agent interactions with frameworks to identify consequences on Si/Al ratios
+
+** Plan of Attack
+
+1. \textbf{What is the preferential orientational of a specific OSDA/Zeolite combination}
+
+   1. Develop a model to capture OSDA Orientations
+      * Classical molecular dynamics (CMD) at very high temperatures ($T \geq 10,000$) to sample different possible orientation
+
+   2. Compute interaction energy (IE) of all FW and OSDA combinations (maybe free energies):
+      * CHA and AEI with TMADA, DMDMP (isomers), and DEDMP (isomers)
+	+ include LTA and TMA? 
+      * Using CMD at \SI{343}{K} (rigid framework)
+      * Using density functional theory with dispersion (DFT-D3) (flexible framework)
+	+ Rigid Framework as well?
+
+   3. Evaluate orientation and positioning dependence of OSDA in FW
+      * Measure the orientation of an OSDA relative to some axis which encompases the cage the OSDA is in
+      * Measure the location of the OSDA center of mass is relative to the center of the zeolite cage
+
+2. \textbf{What is the impact of Al siting with respect to OSDA orientation}
+
+   1. Using some preferred orientation(s)
+      * Using the same technique developed by Sichi, run CMD on Al substituted FW and charged OSDA as in 1(a)
+      * Refine using techniques in 1(b)
+   2. Compare relative energies (or IE?)
+      * Is there a difference between AEI and CHA?
+
+3. \textbf{What is the impact of co-caging (Relevent?)}
+
+   1. Charged or chargless model
+
+
+
+
+
+
+
