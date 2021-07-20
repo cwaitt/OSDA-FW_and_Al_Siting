@@ -1,5 +1,6 @@
 #+begin_header
-#+TITLE: Developing Relationships between FW/OSDA orientation and Al siting 
+#+TITLE: Sampling Orientational Space of Organic Structure Directing Agents in Zeolites: Genetic Algorithm vs. Classical Mechanics
+  
 #+LATEX_CLASS: achemso
 #+LATEX_CLASS_OPTIONS: [journal=accacs,manuscript=article, email=true, layout=traditional]
 #+EXPORT_EXCLUDE_TAGS: noexport
@@ -50,8 +51,9 @@
 ** Objectives
 
 1. Develop models to capture/describe the orientational preference a framework (FW) has for a particular organic structure directing agent (OSDA)
-2. Identify FW/OSDA combinations that could influence Al ordering through preferential OSDA orientations.
-3. Compute and compare organic and inorganic structure directing agent interactions with frameworks to identify consequences on Si/Al ratios
+   1. Compare Genetic Algorithm (GA) and Classical Molecular Dynamics (CMD) ability to sample global configurational space
+   2. Compare GA and CMD ability to sample local configuration
+   3. Compare Drieding force field with DFT
 
 ** Plan of Attack
 
@@ -71,21 +73,49 @@
       * Measure the orientation of an OSDA relative to some axis which encompases the cage the OSDA is in
       * Measure the location of the OSDA center of mass is relative to the center of the zeolite cage
 
-2. \textbf{What is the impact of Al siting with respect to OSDA orientation}
+2. \textbf{What limitations does each model posses?}
 
-   1. Using some preferred orientation(s)
-      * Using the same technique developed by Sichi, run CMD on Al substituted FW and charged OSDA as in 1(a)
-      * Refine using techniques in 1(b)
-   2. Compare relative energies (or IE?)
-      * Is there a difference between AEI and CHA?
+   1. GA-DFT is time restrictive compared to CMD. GA allows for ease of global sampling of OSDA in a cage. Framework can be rigid or flexible. Local configuration is relatively fixed (DEDMP for example).
 
-3. \textbf{What is the impact of co-caging (Relevent?)}
+   2. CMD is quick. Can sample larger ranges of global configurations. Requires sampling at very high temperatures (5000 K) and resampling at normal temperatures (more steps that GA). Currently can do multiple OSDA's (possible in GA but parents must be made by hand). Framework must be rigid (Drieding). CMD allows OSDA to sample local configurations. 
 
-   1. Charged or chargless model
+   3. Combined GA-CMD-DFT. GA to sample Global configurations. CMD to sample local configurations. DFT to relax FW and get Energy (IE).
+
+3. \textbf{Combined GA-CMD-DFT}
+
+   1. Use GA to sample Global configuration.
+
+   2. Identify "unique" orientations/configurations
+
+   3. Use CMD to sample local configurations of "unique" orientations/configurations
+
+   4. Identify "unique" subset of each orientation/configuration
+
+   5. Re-optimize with DFT (or electronic structure) if desired
 
 
 
 
 
 
+* Results to Date
+** GA vs CMD (Structures and Energetics)
+Using the parameters discussed above, we will first compare the lowest energy structure using GA and CMD. The table below describes which method provide similar structures. 
 
+\begin{center}
+\begin{tabular}{c c c| c c c  }
+ \hline
+          & CHA &  & & AEI &\\ 
+ \hline
+ OSDA     & DFT & CMD &  & DFT & CMD \\
+ \hline
+ TMADA    & Yes & Yes &  & Yes & Yes \\ 
+ DMDMP-2c & Yes & Yes &  & Yes & Yes \\  
+ DMDMP-3c & Yes & Yes &  & Difference in Glob Min & See Notes\\
+ DMDMP-3t & Done & Running &  & Difference in Glob Min & See Notes \\
+ DEDMP-2c & Done & Running &  & Difference in Glob Min & Exo/Endo Orient \\
+ DEDMP-3c & Done & Running &  & Difference in Glob Min & Exo/Endo Orient \\
+ DEDMP-3t & Done & Running &  & Done & Running \\ 
+ \hline
+\end{tabular}
+\end{center}

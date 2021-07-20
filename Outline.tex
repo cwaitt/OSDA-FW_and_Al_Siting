@@ -1,4 +1,4 @@
-% Created 2021-07-08 Thu 11:10
+% Created 2021-07-20 Tue 10:02
 % Intended LaTeX compiler: pdflatex
 \documentclass[journal=accacs,manuscript=article, email=true, layout=traditional]{achemso}
   \setkeys{acs}{biblabel=brackets,super=true,articletitle=False,maxauthors=0}
@@ -35,7 +35,7 @@
 \affiliation{Department of Chemical and Biomolecular Engineering, University of Notre Dame, Notre Dame, Indiana 46556, United States}
 \alsoaffiliation{Department of Chemistry and Biochemistry, University of Notre Dame, Notre Dame, Indiana 46556, United States}
 \date{}
-\title{Developing Relationships between FW/OSDA orientation and Al siting}
+\title{Sampling Orientational Space of Organic Structure Directing Agents in Zeolites: Genetic Algorithm vs. Classical Mechanics}
 \begin{document}
 
 \begin{header}
@@ -44,19 +44,22 @@
 \newpage
 
 \section{Workflow}
-\label{sec:orge74f7bd}
+\label{sec:org1147288}
 
 \subsection{Objectives}
-\label{sec:org65c4bf6}
+\label{sec:orgca6df90}
 
 \begin{enumerate}
 \item Develop models to capture/describe the orientational preference a framework (FW) has for a particular organic structure directing agent (OSDA)
-\item Identify FW/OSDA combinations that could influence Al ordering through preferential OSDA orientations.
-\item Compute and compare organic and inorganic structure directing agent interactions with frameworks to identify consequences on Si/Al ratios
+\begin{enumerate}
+\item Compare Genetic Algorithm (GA) and Classical Molecular Dynamics (CMD) ability to sample global configurational space
+\item Compare GA and CMD ability to sample local configuration
+\item Compare Drieding force field with DFT
+\end{enumerate}
 \end{enumerate}
 
 \subsection{Plan of Attack}
-\label{sec:org1266e79}
+\label{sec:org715c911}
 
 \begin{enumerate}
 \item \textbf{What is the preferential orientational of a specific OSDA/Zeolite combination}
@@ -87,24 +90,57 @@
 \end{itemize}
 \end{enumerate}
 
-\item \textbf{What is the impact of Al siting with respect to OSDA orientation}
+\item \textbf{What limitations does each model posses?}
 
 \begin{enumerate}
-\item Using some preferred orientation(s)
-\begin{itemize}
-\item Using the same technique developed by Sichi, run CMD on Al substituted FW and charged OSDA as in 1(a)
-\item Refine using techniques in 1(b)
-\end{itemize}
-\item Compare relative energies (or IE?)
-\begin{itemize}
-\item Is there a difference between AEI and CHA?
-\end{itemize}
+\item GA-DFT is time restrictive compared to CMD. GA allows for ease of global sampling of OSDA in a cage. Framework can be rigid or flexible. Local configuration is relatively fixed (DEDMP for example).
+
+\item CMD is quick. Can sample larger ranges of global configurations. Requires sampling at very high temperatures (5000 K) and resampling at normal temperatures (more steps that GA). Currently can do multiple OSDA's (possible in GA but parents must be made by hand). Framework must be rigid (Drieding). CMD allows OSDA to sample local configurations.
+
+\item Combined GA-CMD-DFT. GA to sample Global configurations. CMD to sample local configurations. DFT to relax FW and get Energy (IE).
 \end{enumerate}
 
-\item \textbf{What is the impact of co-caging (Relevent?)}
+\item \textbf{Combined GA-CMD-DFT}
 
 \begin{enumerate}
-\item Charged or chargless model
+\item Use GA to sample Global configuration.
+
+\item Identify ``unique'' orientations/configurations
+
+\item Use CMD to sample local configurations of ``unique'' orientations/configurations
+
+\item Identify ``unique'' subset of each orientation/configuration
+
+\item Re-optimize with DFT (or electronic structure) if desired
 \end{enumerate}
 \end{enumerate}
+
+
+
+
+
+
+\section{Results to Date}
+\label{sec:orgecc93e8}
+\subsection{GA vs CMD (Structures and Energetics)}
+\label{sec:orgbc9af27}
+Using the parameters discussed above, we will first compare the lowest energy structure using GA and CMD. The table below describes which method provide similar structures. 
+
+\begin{center}
+\begin{tabular}{c c c| c c c  }
+ \hline
+          & CHA &  & & AEI &\\ 
+ \hline
+ OSDA     & DFT & CMD &  & DFT & CMD \\
+ \hline
+ TMADA    & Yes & Yes &  & Yes & Yes \\ 
+ DMDMP-2c & Yes & Yes &  & Yes & Yes \\  
+ DMDMP-3c & Yes & Yes &  & Difference in Glob Min & See Notes\\
+ DMDMP-3t & Done & Running &  & Difference in Glob Min & See Notes \\
+ DEDMP-2c & Done & Running &  & Difference in Glob Min & Exo/Endo Orient \\
+ DEDMP-3c & Done & Running &  & Difference in Glob Min & Exo/Endo Orient \\
+ DEDMP-3t & Done & Running &  & Done & Running \\ 
+ \hline
+\end{tabular}
+\end{center}
 \end{document}
