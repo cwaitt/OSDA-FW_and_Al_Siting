@@ -1,5 +1,5 @@
 #+begin_header
-#+TITLE: Sampling Orientational Space of Organic Structure Directing Agents in Zeolites: Genetic Algorithm vs. Classical Mechanics
+#+TITLE: Orientational Flexibility of Organic Structure Directing Agents in CHA and AEI
   
 #+LATEX_CLASS: achemso
 #+LATEX_CLASS_OPTIONS: [journal=accacs,manuscript=article, email=true, layout=traditional]
@@ -47,51 +47,44 @@
 \newpage
 
 * Workflow
+** Motivations
+1. OSDA/FW IE has been used as a reporter of an OSDAs crystallization affinity for a particular FW 
+2. While OSDA will "fit", some floppiness and even orientation flexibility exist which can influence computed IE
+3. We have two approaches to sample orientational flexibility and compute IE:
+   1. Asexual Genetic Algorithm (AGA):
+      1. Uses information based on previously computed structures (orientations) to search for minimum structures
+	 1. Energies evaluated with DFT
+   2. Classical Molecular Dynamics (CMD):
+      1. Randomly insert OSDA into FW
+      2. Run Dynamics at high Temp (5000 K)
+      3. Bin orientations
+      4. Re-run dynamics at "reasonable" Temp (500 K) on binned orientations to search for available orientations
+	 1. Energies evaluated with Drieding force field (as used in the literature when sampling OSDA orientation space)
 
 ** Objectives
 
-1. Develop models to capture/describe the orientational preference a framework (FW) has for a particular organic structure directing agent (OSDA)
-   1. Compare Genetic Algorithm (GA) and Classical Molecular Dynamics (CMD) ability to sample global configurational space
-   2. Compare GA and CMD ability to sample local configuration
-   3. Compare Drieding force field with DFT
+1. Compare FW/IE interactions across two similar frameworks (CHA and AEI) across a family of OSDAs
+2. Compare OSDA orientational flexibility
+3. Compare strategies for extracting orientations and IE (mean IE in the CMD cases).
+4. Compare predictive ability, dangers strategies.
 
 ** Plan of Attack
 
-1. \textbf{What is the preferential orientational of a specific OSDA/Zeolite combination}
+1. Craig will be doing the DFT/GA calculations in siliceous zeolites with CN OSDAs.
+   1. FWs are obtained from IZA (using IZA lattice constants)
+   2. A single OSDA is placed into one of the CHA and AEI cages
+      1. OSDA nitrogens are replaced with carbons to maintain charge neutrality
+   3. An AGA is used to sample the configurational space the OSDA can adopt within a FW cage
+      1. 20 parents are randomly displace within a cage
+      2. The structures are minimized using the PBE-D3 functional
+	 1. Resulting energies are used to score the candidates
+      3. Parents used within the AGA are selected based on a Boltzmann distribution
+      4. Those parents undergo a mutation which translates and rotates them in the cage.
+      5. This process is repeated until 10 children have been generated
+      6. The children are minimized using the PBE-D3 functional and steps 3-6 are repeated until a total of 50 structures have been generated
+   4. These 50 candidates are a representation of the global configurations an OSDA can adopt with a particular cage
 
-   1. Develop a model to capture OSDA Orientations
-      * Classical molecular dynamics (CMD) at very high temperatures ($T \geq 5,000$) to sample different possible orientation
-
-   2. Compute interaction energy (IE) of all FW and OSDA combinations (maybe free energies):
-      * CHA and AEI with TMADA, DMDMP (isomers), and DEDMP (isomers)
-	+ include LTA and TMA? 
-      * Using CMD at \SI{343}{K} (rigid framework)
-      * Using density functional theory with dispersion (DFT-D3) (flexible framework)
-	+ Rigid Framework as well?
-
-   3. Evaluate orientation and positioning dependence of OSDA in FW
-      * Measure the orientation of an OSDA relative to some axis which encompases the cage the OSDA is in
-      * Measure the location of the OSDA center of mass is relative to the center of the zeolite cage
-
-2. \textbf{What limitations does each model posses?}
-
-   1. GA-DFT is time restrictive compared to CMD. GA allows for ease of global sampling of OSDA in a cage. Framework can be rigid or flexible. Local configuration is relatively fixed (DEDMP for example).
-
-   2. CMD is quick. Can sample larger ranges of global configurations. Requires sampling at very high temperatures (5000 K) and resampling at normal temperatures (more steps that GA). Currently can do multiple OSDA's (possible in GA but parents must be made by hand). Framework must be rigid (Drieding). CMD allows OSDA to sample local configurations. 
-
-   3. Combined GA-CMD-DFT. GA to sample Global configurations. CMD to sample local configurations. DFT to relax FW and get Energy (IE).
-
-3. \textbf{Combined GA-CMD-DFT}
-
-   1. Use GA to sample Global configuration.
-
-   2. Identify "unique" orientations/configurations
-
-   3. Use CMD to sample local configurations of "unique" orientations/configurations
-
-   4. Identify "unique" subset of each orientation/configuration
-
-   5. Re-optimize with DFT (or electronic structure) if desired
+2. Xuyao will be doing the CMD calculations in siliceous zeolites with CN OSDAs.
 
 
 
@@ -99,23 +92,56 @@
 
 
 * Results to Date
-** GA vs CMD (Structures and Energetics)
-Using the parameters discussed above, we will first compare the lowest energy structure using GA and CMD. The table below describes which method provide similar structures. 
+** OSDAs of interest and the FW they crystallize
+Using the parameters/models discussed above, we will first compare the lowest energy structure using GA and lowest energy average CMD energy to see if PBE and Dreiding predict similar or differenct affinities for OSDAs to crystallize CHA or AEI. The table below summarizes the OSDAs used in this study and is separated based on which OSDA crystallizes which framework. 
 
 \begin{center}
-\begin{tabular}{c c c| c c c  }
- \hline
-          & CHA &  & & AEI &\\ 
- \hline
- OSDA     & DFT & CMD &  & DFT & CMD \\
- \hline
- TMADA    & Yes & Yes &  & Yes & Yes \\ 
- DMDMP-2c & Yes & Yes &  & Yes & Yes \\  
- DMDMP-3c & Yes & Yes &  & Difference in Glob Min & See Notes\\
- DMDMP-3t & Done & Running &  & Difference in Glob Min & See Notes \\
- DEDMP-2c & Done & Running &  & Difference in Glob Min & Exo/Endo Orient \\
- DEDMP-3c & Done & Running &  & Difference in Glob Min & Exo/Endo Orient \\
- DEDMP-3t & Done & Running &  & Done & Running \\ 
- \hline
+\begin{tabular}{c|c}
+\hline
+Zeolite & OSDAs \\
+\hline
+CHA          & TMADA, DEDMP-3c, DEDMP-3t, TMBCN, PMCH-3c, PMCH-3t \\
+AEI          & DMDMP-2c, DMDMP-3c, DMDMP-3t, DEDMP-2c, DMBCN \\
+Intergrowth  & Tetra \\
+\hline
 \end{tabular}
 \end{center}
+
+The names for these OSDA's are abbreviations for there full names. We will need to think of a clever way on how to present each one (e.g. Template A,B,C etc.)
+
+** Rigid Framework Assumption
+Besides evaluating energy differences differently (Dreiding vs. DFT), there is one considerable difference between our two models. The CMD method is restricted to a rigid framework (since Si-O parameters are unknown for Drieding). Therefore it is a reasonable question to ask, "What happens to the DFT results when the framework is rigid and relaxed?" To answer this question, I did two set of DFT calculations. First, I performed my AGA by minimizing the OSDA/FW to a local minimum. I then searched for the lowest energy structure, took the initial structure file (which as the Si-O atoms in the zeolite from IZA) and reoptimized the structures but kept the zeolite fixed. This gives me two structures, one where only the OSDA was relaxed to a minimum and one where both the OSDA and Zeolite are relaxed to a minimum. The results for CHA are shown in the Figure below.
+
+include figure here
+
+** Orientation Freedom
+We use both the AGA and MD sampling to compare the orientational freedom of an OSDA in a framework. We are comparing orientational space where the OSDA and FW are allowed to be relaxed (DFT/AGA) and ones where only the OSDA is allowed to move(CMD). We have evaluated all of the OSDAs in the table above (with the exception of one of the DMDMP isomers) and we are going to compare two sets of results in this outline. 
+
+We have devised a scheme to visualize the orientation an OSDA adopts within the cage. We compute the angle the OSDA makes with the long axis with the cage (using the tertiary carbon and an adjacent carbon or the center of mass with respect to DMBCN which does not have an adjacent carbon), and the displacement of the tertiary carbon along that vertical vector. 
+
+\begin{figure}
+\begin{center}
+
+\includegraphics[scale=.5]{./Figures/CHA-GA-CMD-TMADA.pdf}
+\caption{TMADA in CHA. Left CMD results, Right DFT/AGA results.} 
+\label{fig:TMADA-CHA} 
+
+\end{center}
+\end{figure}
+
+The results for fig \ref{fig:TMADA-CHA} above show that TMADA is fairly rigid in the CHA cage. There are two degenerate orientations of TMADA in CHA in the AGA results, a downward and upward orientation (blue and red points respectively). These are degenerate given the symmetry of the CHA cage. The CMD results only predict one orientation however. The energy barrier to flip to another orientation is greater than 5000 K and thus the CMD sampling method did not sample the other regime. Otherwise, Comparison of the two blue points is fairly similar. The lowest energy structure from DFT is about 30 kJ/mol higher in energy than the average CMD energy. For other OSDA's in CHA, there is a mixture of results that look like the figure above (where some regime is missed, due to the high barrier to rotate) and others where the CMD and GA results look "identical."
+
+\begin{figure}
+\begin{center}
+
+\includegraphics[scale=.5]{./Figures/AEI-GA-CMD-DMDMP_2c.pdf}
+\caption{DMDMP-2c in CHA. Left CMD results, Right DFT/AGA results.} 
+\label{fig:DMDMP-2c-AEI} 
+
+\end{center}
+\end{figure}
+
+The results for fig \ref{fig:DMDMP-2c-AEI} are for DMDMP-2c in AEI. Both the left and right figures look very similar. The AEI wide frame of the cage is sufficiently large enough for the collection of OSDAs to rotate and change orientations within the cage. Both techniques produce similar orientational flexibility. DMDMP-2c fits fairly loose within the cage, as do the majority of OSDAs for this study. The lowest energy orientation from the DFT results is at about 0.5 and has an energy of -125 kJ/mol, and the CMD results of the same orientation have an energy of approximately 50 kJ/mol higher in energy than the average CMD results for that orientation. 
+
+** Dreiding vs. DFT
+We can compare the overall similarity of the Dreiding and DFT predicted energies for the lowest energy average configuration and lowest energy structure respectively. The Figure bellow plot a parity plot between the two. There is something not quiet right.
