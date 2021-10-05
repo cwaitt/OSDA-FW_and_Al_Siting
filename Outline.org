@@ -84,6 +84,16 @@
       6. The children are minimized using the PBE-D3 functional and steps 3-6 are repeated until a total of 50 structures have been generated
    4. These 50 candidates are a representation of the global configurations an OSDA can adopt with a particular cage
 
+\begin{figure}
+\begin{center}
+
+\includegraphics[scale=.5,trim={0cm 5cm 0cm 0cm},clip]{./Figures/DFT_GA_to_Ori.pdf}
+\caption{Schematic representation of the DFT/AGA proceedure. Candidates are minimized are generated in sequencial step and minimized with the PBE-D3 functional. We select the tertiary carbon (previously the notrogen) of an OSDA and look at the orientation and translation within a framwork with respect to a vector which describes the length of the cage. The lowest energy point corresponds to the most favorable configuration the OSDA can sit within the framework and is denoted as $\text{IE}^{\text{DFT}}_{\text{L}}$}. 
+\label{fig:DFT_GA_to_Ori} 
+
+\end{center}
+\end{figure}
+
 2. Xuyao will be doing the CMD calculations in siliceous zeolites with CN OSDAs.
 
 
@@ -112,7 +122,17 @@ The names for these OSDA's are abbreviations for there full names. We will need 
 ** Rigid Framework Assumption
 Besides evaluating energy differences differently (Dreiding vs. DFT), there is one considerable difference between our two models. The CMD method is restricted to a rigid framework (since Si-O parameters are unknown for Drieding). Therefore it is a reasonable question to ask, "What happens to the DFT results when the framework is rigid and relaxed?" To answer this question, I did two set of DFT calculations. First, I performed my AGA by minimizing the OSDA/FW to a local minimum. I then searched for the lowest energy structure, took the initial structure file (which as the Si-O atoms in the zeolite from IZA) and reoptimized the structures but kept the zeolite fixed. This gives me two structures, one where only the OSDA was relaxed to a minimum and one where both the OSDA and Zeolite are relaxed to a minimum. The results for CHA are shown in the Figure below.
 
-include figure here
+\begin{figure}
+\begin{center}
+
+\includegraphics[scale=.5,trim={0cm 0cm 0cm 0cm},clip]{./Figures/Framework-flex.pdf}
+\caption{Parity plot comparing the the lowest energy orientation of each OSDA from the GA (flexible framework), compared to a rigid framework. $R^{2}$ value of the data compared to the parity line is 0.99999. }. 
+\label{fig:Rig_v_Flex} 
+
+\end{center}
+\end{figure}
+
+Figure \ref{fig:Rig_v_Flex} compares the energy of the Rigid framework to the flexible framework. The largest deviation from the parity line is approximately 18 kJ/mol (DMDMP-2c in CHA). and the points lie on the parity line. As such it doesn't make too much of a difference if the framework is allowed to relax to a minimum. For the remainder of this study the framework is flexible.
 
 ** Orientation Freedom
 We use both the AGA and MD sampling to compare the orientational freedom of an OSDA in a framework. We are comparing orientational space where the OSDA and FW are allowed to be relaxed (DFT/AGA) and ones where only the OSDA is allowed to move(CMD). We have evaluated all of the OSDAs in the table above (with the exception of one of the DMDMP isomers) and we are going to compare two sets of results in this outline. 
