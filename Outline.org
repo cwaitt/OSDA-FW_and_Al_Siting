@@ -84,22 +84,35 @@
       6. The children are minimized using the PBE-D3 functional and steps 3-6 are repeated until a total of 50 structures have been generated
    4. These 50 candidates are a representation of the global configurations an OSDA can adopt with a particular cage
 
-\begin{figure}
-\begin{center}
+   \begin{figure}
+   \begin{center}
 
-\includegraphics[scale=.5,trim={0cm 5cm 0cm 0cm},clip]{./Figures/DFT_GA_to_Ori.pdf}
-\caption{Schematic representation of the DFT/AGA proceedure. Candidates are minimized are generated in sequencial step and minimized with the PBE-D3 functional. We select the tertiary carbon (previously the notrogen) of an OSDA and look at the orientation and translation within a framwork with respect to a vector which describes the length of the cage. The lowest energy point corresponds to the most favorable configuration the OSDA can sit within the framework and is denoted as $\text{IE}^{\text{DFT}}_{\text{L}}$}. 
-\label{fig:DFT_GA_to_Ori} 
+    \includegraphics[scale=.5,trim={0cm 5cm 0cm 0cm},clip]{./Figures/DFT_GA_to_Ori.pdf}
+    \caption{Schematic representation of the DFT/AGA proceedure. Candidates are minimized are generated in sequencial step and minimized with the PBE-D3 functional. We select the tertiary carbon (previously the notrogen) of an OSDA and look at the orientation and translation within a framwork with respect to a vector which describes the length of the cage. The lowest energy point corresponds to the most favorable configuration the OSDA can sit within the framework and is denoted as $\text{IE}^{\text{DFT}}_{\text{L}}$}. 
+    \label{fig:DFT_GA_to_Ori} 
 
-\end{center}
-\end{figure}
+    \end{center}
+    \end{figure}
 
 2. Xuyao will be doing the CMD calculations in siliceous zeolites with CN OSDAs.
+   1. CHA and AEI unit cell are full siliceous and obtained from IZA using IZA lattice constant. Nitrogen in OSDAs are replaced with C.
+   2. For each OSDA candidates, one OSDA is inserted in AEI and CHA with random location and orientation.
+   3. Dreiding force field is used to describe OSDA/FW interaction and OSDA self potential.
+   4. MD at 5000K is used to sample the global configurational space of OSDA in FW.
+      1. FW is set to be rigid. Only OSDA is sampled by MD.
+      2. 1000 ps equilibartion run and 1000 ps production run with 0.2 fs time step is performed for each MD sampling.
+   5. From the high temperature MD trajectory, each image are sorted base on their spatial orientations into 8 bins. In each bin, the lowest potential energy image is selected as the representative of this orientation.
+   6. These 8 low energy configuration represent the global configurations of Each representative is re-sampled with MD at 343K with same time step and simulation length as above to explore the local configuration.
 
+   \begin{figure}
+   \begin{center}
 
+   \includegraphics[scale=.5]{./Figures/CMD-OSDA-FW-Workflow.pdf}
+   \caption{Workflow of CMD proceedure. Each OSDA/FW combinations is sampled at 5000K with MD to explore global configurations as much as possible. 8 configurations from differnt spacial cosine value with lowest energy are selected as the representive of global configuration and further reasmpled for their local orientations with MD at 343K again. Same plot for camparing IE, orientation and translation are constructed. Each region corresponding to one local configurations of OSDA in FW cages}
+   \label{fig:CMD-OSDA-FW-Workflow}
 
-
-
+   \end{center}
+   \end{figure}
 
 * Results to Date
 ** OSDAs of interest and the FW they crystallize
